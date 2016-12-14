@@ -1,0 +1,9 @@
+spring:
+  dubbo:
+    name: capital-service-provider
+    owner: xuxl
+    address: zookeeper://127.0.0.1:2181
+    port: 20881
+
+server:
+  port: 9999

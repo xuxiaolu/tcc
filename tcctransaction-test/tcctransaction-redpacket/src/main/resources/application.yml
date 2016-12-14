@@ -1,0 +1,6 @@
+spring:
+  dubbo:
+    name: redpacket-service-provider
+    owner: xuxl
+    address: zookeeper://127.0.0.1:2181
+    port: 20882

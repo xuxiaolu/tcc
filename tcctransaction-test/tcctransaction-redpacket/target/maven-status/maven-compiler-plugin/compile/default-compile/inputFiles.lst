@@ -1,0 +1,10 @@
+E:\workspace-sts-3.7.3.RELEASE\tcctransaction\tcctransaction-test\tcctransaction-redpacket\src\main\java\com\xuxl\tcctransaction\redpacket\domain\entity\TradeOrder.java
+E:\workspace-sts-3.7.3.RELEASE\tcctransaction\tcctransaction-test\tcctransaction-redpacket\src\main\java\com\xuxl\tcctransaction\redpacket\config\DataSourceConfig.java
+E:\workspace-sts-3.7.3.RELEASE\tcctransaction\tcctransaction-test\tcctransaction-redpacket\src\main\java\com\xuxl\tcctransaction\redpacket\domain\repository\TradeOrderRepository.java
+E:\workspace-sts-3.7.3.RELEASE\tcctransaction\tcctransaction-test\tcctransaction-redpacket\src\main\java\com\xuxl\tcctransaction\redpacket\infrastructure\dao\RedPacketAccountDao.java
+E:\workspace-sts-3.7.3.RELEASE\tcctransaction\tcctransaction-test\tcctransaction-redpacket\src\main\java\com\xuxl\tcctransaction\redpacket\infrastructure\dao\TradeOrderDao.java
+E:\workspace-sts-3.7.3.RELEASE\tcctransaction\tcctransaction-test\tcctransaction-redpacket\src\main\java\com\xuxl\tcctransaction\redpacket\service\RedPacketTradeOrderServiceImpl.java
+E:\workspace-sts-3.7.3.RELEASE\tcctransaction\tcctransaction-test\tcctransaction-redpacket\src\main\java\com\xuxl\tcctransaction\redpacket\domain\entity\RedPacketAccount.java
+E:\workspace-sts-3.7.3.RELEASE\tcctransaction\tcctransaction-test\tcctransaction-redpacket\src\main\java\com\xuxl\tcctransaction\redpacket\RedPacketApplication.java
+E:\workspace-sts-3.7.3.RELEASE\tcctransaction\tcctransaction-test\tcctransaction-redpacket\src\main\java\com\xuxl\tcctransaction\redpacket\domain\repository\RedPacketAccountRepository.java
+E:\workspace-sts-3.7.3.RELEASE\tcctransaction\tcctransaction-test\tcctransaction-redpacket\src\main\java\com\xuxl\tcctransaction\redpacket\service\RedPacketAccountServiceImpl.java

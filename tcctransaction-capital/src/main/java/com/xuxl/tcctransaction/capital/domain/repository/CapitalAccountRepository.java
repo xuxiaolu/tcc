@@ -1,0 +1,26 @@
+package com.xuxl.tcctransaction.capital.domain.repository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.xuxl.tcctransaction.capital.domain.entity.CapitalAccount;
+import com.xuxl.tcctransaction.capital.infrastructure.dao.CapitalAccountDao;
+
+/**
+ * Created by changming.xie on 4/2/16.
+ */
+@Repository
+public class CapitalAccountRepository {
+
+    @Autowired
+    CapitalAccountDao capitalAccountDao;
+
+    public CapitalAccount findByUserId(long userId) {
+
+        return capitalAccountDao.findByUserId(userId);
+    }
+
+    public void save(CapitalAccount capitalAccount) {
+        capitalAccountDao.update(capitalAccount);
+    }
+}

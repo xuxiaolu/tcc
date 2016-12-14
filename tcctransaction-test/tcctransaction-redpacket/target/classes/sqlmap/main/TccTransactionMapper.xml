@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xuxl.tcctransaction.spring.mapper.TccTransactionMapper">
+  <resultMap id="BaseResultMap" type="com.xuxl.tcctransaction.spring.domain.TccTransaction">
+    <id column="TRANSACTION_ID" jdbcType="INTEGER" property="transactionId" />
+    <result column="DOMAIN" jdbcType="VARCHAR" property="domain" />
+    <result column="STATUS" jdbcType="INTEGER" property="status" />
+    <result column="TRANSACTION_TYPE" jdbcType="INTEGER" property="transactionType" />
+    <result column="RETRIED_COUNT" jdbcType="INTEGER" property="retriedCount" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="LAST_UPDATE_TIME" jdbcType="TIMESTAMP" property="lastUpdateTime" />
+    <result column="VERSION" jdbcType="INTEGER" property="version" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.xuxl.tcctransaction.spring.domain.TccTransactionWithBLOBs">
+    <result column="GLOBAL_TX_ID" jdbcType="VARBINARY" property="globalTxId" />
+    <result column="BRANCH_QUALIFIER" jdbcType="VARBINARY" property="branchQualifier" />
+    <result column="CONTENT" jdbcType="VARBINARY" property="content" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    TRANSACTION_ID, DOMAIN, STATUS, TRANSACTION_TYPE, RETRIED_COUNT, CREATE_TIME, LAST_UPDATE_TIME, 
+    VERSION
+  </sql>
+  <sql id="Blob_Column_List">
+    GLOBAL_TX_ID, BRANCH_QUALIFIER, CONTENT
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.xuxl.tcctransaction.spring.domain.TccTransactionCriteria" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from TCC_TRANSACTION_RED
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.xuxl.tcctransaction.spring.domain.TccTransactionCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TCC_TRANSACTION_RED
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from TCC_TRANSACTION_RED
+    where TRANSACTION_ID = #{transactionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from TCC_TRANSACTION_RED
+    where TRANSACTION_ID = #{transactionId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xuxl.tcctransaction.spring.domain.TccTransactionCriteria">
+    delete from TCC_TRANSACTION_RED
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="TRANSACTION_ID" keyProperty="transactionId" parameterType="com.xuxl.tcctransaction.spring.domain.TccTransactionWithBLOBs" useGeneratedKeys="true">
+    insert into TCC_TRANSACTION_RED (DOMAIN, STATUS, TRANSACTION_TYPE, 
+      RETRIED_COUNT, CREATE_TIME, LAST_UPDATE_TIME, 
+      VERSION, GLOBAL_TX_ID, BRANCH_QUALIFIER, 
+      CONTENT)
+    values (#{domain,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{transactionType,jdbcType=INTEGER}, 
+      #{retriedCount,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{lastUpdateTime,jdbcType=TIMESTAMP}, 
+      #{version,jdbcType=INTEGER}, #{globalTxId,jdbcType=VARBINARY}, #{branchQualifier,jdbcType=VARBINARY}, 
+      #{content,jdbcType=VARBINARY})
+  </insert>
+  <insert id="insertSelective" keyColumn="TRANSACTION_ID" keyProperty="transactionId" parameterType="com.xuxl.tcctransaction.spring.domain.TccTransactionWithBLOBs" useGeneratedKeys="true">
+    insert into TCC_TRANSACTION_RED
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="domain != null">
+        DOMAIN,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="transactionType != null">
+        TRANSACTION_TYPE,
+      </if>
+      <if test="retriedCount != null">
+        RETRIED_COUNT,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="lastUpdateTime != null">
+        LAST_UPDATE_TIME,
+      </if>
+      <if test="version != null">
+        VERSION,
+      </if>
+      <if test="globalTxId != null">
+        GLOBAL_TX_ID,
+      </if>
+      <if test="branchQualifier != null">
+        BRANCH_QUALIFIER,
+      </if>
+      <if test="content != null">
+        CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="domain != null">
+        #{domain,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="transactionType != null">
+        #{transactionType,jdbcType=INTEGER},
+      </if>
+      <if test="retriedCount != null">
+        #{retriedCount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateTime != null">
+        #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="globalTxId != null">
+        #{globalTxId,jdbcType=VARBINARY},
+      </if>
+      <if test="branchQualifier != null">
+        #{branchQualifier,jdbcType=VARBINARY},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xuxl.tcctransaction.spring.domain.TccTransactionCriteria" resultType="java.lang.Long">
+    select count(*) from TCC_TRANSACTION_RED
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update TCC_TRANSACTION_RED
+    <set>
+      <if test="record.transactionId != null">
+        TRANSACTION_ID = #{record.transactionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.domain != null">
+        DOMAIN = #{record.domain,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.transactionType != null">
+        TRANSACTION_TYPE = #{record.transactionType,jdbcType=INTEGER},
+      </if>
+      <if test="record.retriedCount != null">
+        RETRIED_COUNT = #{record.retriedCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdateTime != null">
+        LAST_UPDATE_TIME = #{record.lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.version != null">
+        VERSION = #{record.version,jdbcType=INTEGER},
+      </if>
+      <if test="record.globalTxId != null">
+        GLOBAL_TX_ID = #{record.globalTxId,jdbcType=VARBINARY},
+      </if>
+      <if test="record.branchQualifier != null">
+        BRANCH_QUALIFIER = #{record.branchQualifier,jdbcType=VARBINARY},
+      </if>
+      <if test="record.content != null">
+        CONTENT = #{record.content,jdbcType=VARBINARY},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update TCC_TRANSACTION_RED
+    set TRANSACTION_ID = #{record.transactionId,jdbcType=INTEGER},
+      DOMAIN = #{record.domain,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=INTEGER},
+      TRANSACTION_TYPE = #{record.transactionType,jdbcType=INTEGER},
+      RETRIED_COUNT = #{record.retriedCount,jdbcType=INTEGER},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      LAST_UPDATE_TIME = #{record.lastUpdateTime,jdbcType=TIMESTAMP},
+      VERSION = #{record.version,jdbcType=INTEGER},
+      GLOBAL_TX_ID = #{record.globalTxId,jdbcType=VARBINARY},
+      BRANCH_QUALIFIER = #{record.branchQualifier,jdbcType=VARBINARY},
+      CONTENT = #{record.content,jdbcType=VARBINARY}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update TCC_TRANSACTION_RED
+    set TRANSACTION_ID = #{record.transactionId,jdbcType=INTEGER},
+      DOMAIN = #{record.domain,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=INTEGER},
+      TRANSACTION_TYPE = #{record.transactionType,jdbcType=INTEGER},
+      RETRIED_COUNT = #{record.retriedCount,jdbcType=INTEGER},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      LAST_UPDATE_TIME = #{record.lastUpdateTime,jdbcType=TIMESTAMP},
+      VERSION = #{record.version,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xuxl.tcctransaction.spring.domain.TccTransactionWithBLOBs">
+    update TCC_TRANSACTION_RED
+    <set>
+      <if test="domain != null">
+        DOMAIN = #{domain,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="transactionType != null">
+        TRANSACTION_TYPE = #{transactionType,jdbcType=INTEGER},
+      </if>
+      <if test="retriedCount != null">
+        RETRIED_COUNT = #{retriedCount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateTime != null">
+        LAST_UPDATE_TIME = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        VERSION = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="globalTxId != null">
+        GLOBAL_TX_ID = #{globalTxId,jdbcType=VARBINARY},
+      </if>
+      <if test="branchQualifier != null">
+        BRANCH_QUALIFIER = #{branchQualifier,jdbcType=VARBINARY},
+      </if>
+      <if test="content != null">
+        CONTENT = #{content,jdbcType=VARBINARY},
+      </if>
+    </set>
+    where TRANSACTION_ID = #{transactionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.xuxl.tcctransaction.spring.domain.TccTransactionWithBLOBs">
+    update TCC_TRANSACTION_RED
+    set DOMAIN = #{domain,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=INTEGER},
+      TRANSACTION_TYPE = #{transactionType,jdbcType=INTEGER},
+      RETRIED_COUNT = #{retriedCount,jdbcType=INTEGER},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      LAST_UPDATE_TIME = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      VERSION = #{version,jdbcType=INTEGER},
+      GLOBAL_TX_ID = #{globalTxId,jdbcType=VARBINARY},
+      BRANCH_QUALIFIER = #{branchQualifier,jdbcType=VARBINARY},
+      CONTENT = #{content,jdbcType=VARBINARY}
+    where TRANSACTION_ID = #{transactionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xuxl.tcctransaction.spring.domain.TccTransaction">
+    update TCC_TRANSACTION_RED
+    set DOMAIN = #{domain,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=INTEGER},
+      TRANSACTION_TYPE = #{transactionType,jdbcType=INTEGER},
+      RETRIED_COUNT = #{retriedCount,jdbcType=INTEGER},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      LAST_UPDATE_TIME = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      VERSION = #{version,jdbcType=INTEGER}
+    where TRANSACTION_ID = #{transactionId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByExampleWithBLOBsWithRowbounds" parameterType="com.xuxl.tcctransaction.spring.domain.TccTransactionCriteria" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from TCC_TRANSACTION_RED
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExampleWithRowbounds" parameterType="com.xuxl.tcctransaction.spring.domain.TccTransactionCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TCC_TRANSACTION_RED
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

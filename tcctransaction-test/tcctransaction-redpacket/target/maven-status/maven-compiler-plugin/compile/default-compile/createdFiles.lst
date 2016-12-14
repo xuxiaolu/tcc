@@ -1,0 +1,10 @@
+com\xuxl\tcctransaction\redpacket\domain\repository\TradeOrderRepository.class
+com\xuxl\tcctransaction\redpacket\service\RedPacketTradeOrderServiceImpl.class
+com\xuxl\tcctransaction\redpacket\domain\entity\RedPacketAccount.class
+com\xuxl\tcctransaction\redpacket\infrastructure\dao\RedPacketAccountDao.class
+com\xuxl\tcctransaction\redpacket\domain\repository\RedPacketAccountRepository.class
+com\xuxl\tcctransaction\redpacket\RedPacketApplication.class
+com\xuxl\tcctransaction\redpacket\domain\entity\TradeOrder.class
+com\xuxl\tcctransaction\redpacket\service\RedPacketAccountServiceImpl.class
+com\xuxl\tcctransaction\redpacket\infrastructure\dao\TradeOrderDao.class
+com\xuxl\tcctransaction\redpacket\config\DataSourceConfig.class

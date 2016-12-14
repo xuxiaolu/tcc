@@ -1,0 +1,7 @@
+com\xuxl\tcctransaction\dubbo\DubboReferenceBean.class
+com\xuxl\tcctransaction\dubbo\DubboAnnotationBean.class
+com\xuxl\tcctransaction\dubbo\DubboReference.class
+com\xuxl\tcctransaction\dubbo\DubboServiceBean.class
+com\xuxl\tcctransaction\dubbo\EnableDubboAnnotationBeanRegister.class
+com\xuxl\tcctransaction\dubbo\DubboService.class
+com\xuxl\tcctransaction\dubbo\DubboAnnotationBeanRegister.class
